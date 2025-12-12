@@ -1,3 +1,13 @@
+# import json
+
+# def lambda_handler(event, context):
+#     # TODO implement
+#     return {
+#         'statusCode': 200,
+#         'body': json.dumps('Hello from Lambda!')
+#     }
+
+
 # delete_file.py
 import os, json, boto3, logging
 logger = logging.getLogger()
@@ -22,17 +32,35 @@ def lambda_handler(event, context):
     if not user_sub:
         return {"statusCode":401,"body":json.dumps({"message":"unauthorized"})}
 
-    rec = dynamodb.Table(FILES_TABLE).get_item(Key={'fileId': s3_key}).get('Item')
+    rec = dynamodb.Table(FILES_TABLE).get_item(Key={'fieldId': s3_key}).get('Item')
     if not rec or rec.get('userId') != user_sub:
         return {"statusCode":403,"body":json.dumps({"message":"not authorized"})}
 
-    user = dynamodb.Table(USERS_TABLE).get_item(Key={'id': user_sub}).get('Item')
+    user = dynamodb.Table(USERS_TABLE).get_item(Key={'userId': user_sub}).get('Item')
     bucket = user.get('bucketName') or ROOT_BUCKET
 
     # delete S3 object
     s3.delete_object(Bucket=bucket, Key=s3_key)
     # delete metadata
-    dynamodb.Table(FILES_TABLE).delete_item(Key={'fileId': s3_key})
-    return {"statusCode":200,"body":json.dumps({"message":"deleted"})}
+    dynamodb.Table(FILES_TABLE).delete_item(Key={'fieldId': s3_key})
+    return {
+        "statusCode":200,
+        "headers": {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Content-Type,Authorization",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT,DELETE",
+        },
+        "body":json.dumps({"message":"deleted"})
+    }
+
+
+
+
+
+
+
+
+
+
 
 
