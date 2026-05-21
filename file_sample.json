@@ -1,0 +1,29 @@
+{
+  "fieldId": {
+    "S": "e40814c8-80b1-705e-3281-5fde583cdcc8/20260414T023156_testFile_3.txt"
+  },
+  "contentType": {
+    "S": "text/plain"
+  },
+  "createdAt": {
+    "N": "1776133916"
+  },
+  "fileId": {
+    "S": "e40814c8-80b1-705e-3281-5fde583cdcc8/20260414T023156_testFile_3.txt"
+  },
+  "fileName": {
+    "S": "testFile_3.txt"
+  },
+  "isPublic": {
+    "BOOL": true
+  },
+  "s3Key": {
+    "S": "e40814c8-80b1-705e-3281-5fde583cdcc8/20260414T023156_testFile_3.txt"
+  },
+  "shareToken": {
+    "S": "862333c1-e29b-43d9-a0c4-60742b7e7b0c"
+  },
+  "userId": {
+    "S": "e40814c8-80b1-705e-3281-5fde583cdcc8"
+  }
+}
